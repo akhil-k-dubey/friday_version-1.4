@@ -924,7 +924,7 @@ class StreamingVoiceCapture:
                     "He gives voice commands like: open notepad, close calculator, "
                     "open WhatsApp, send a message, search the web, play music, "
                     "write code, what is the weather, how are you, go on, "
-                    "shut down, nice Friday, what are your skills, "
+                    "nice Friday, what are your skills, "
                     "multiply, add, subtract, divide, calculate. "
                     "Names and terms he mentions: Akhil Singh, Jay Singh, Friday, DroidBox, "
                     "sounddevice_stream, Kokoro, Silero, RNNoise, Qwen3."

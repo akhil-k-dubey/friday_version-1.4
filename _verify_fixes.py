@@ -3,7 +3,7 @@ import subprocess, sys, re
 
 # ── 1. Compile check ──────────────────────────────────────────────────────
 print("Compiling core files...")
-for f in ("commands.py", "voice.py", "main.py", "skills.py", "automation.py"):
+for f in ("commands.py", "voice.py", "main.py", "skills/__init__.py", "automation.py"):
     result = subprocess.run([sys.executable, "-m", "py_compile", f], capture_output=True, text=True)
     if result.returncode != 0:
         print(f"  FAIL: {f}\n{result.stderr}")

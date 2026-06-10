@@ -125,7 +125,7 @@ class TestWave4Fixes(unittest.TestCase):
              
              # Turn 0: normal LLM run, which gets interrupted
              # Turn 1: user recovers and says "remember...", triggering intent
-             mock_detect.side_effect = [None, ("remember", "keys||in the drawer", "I've saved that to my memory.")]
+             mock_detect.return_value = ("remember", "keys||in the drawer", "I've saved that to my memory.")
              
              _handle_brain_response(mock_agent, mock_voice, "hello", mock_memory)
              

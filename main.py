@@ -408,7 +408,7 @@ def run(
     # Wire TTS into skills so timers/reminders speak aloud when they fire.
     # Uses speak_alarm (non-blocking) so alerts don't starve the TTS pipeline.
     import skills as _skills_mod
-    _skills_mod._announce_fn = voice.speak_alarm
+    _skills_mod.set_announce_fn(voice.speak_alarm)
 
     def _make_voice_confirm_fn(voice_io):
         """
@@ -925,6 +925,14 @@ def _handle_brain_response(
             break
 
         print(f"You (voice/barge-in) > {recovered}")
+        direct = detect_direct_intent(recovered)
+        if direct is not None:
+            _abort_speculative_llm()
+            _handle_direct_skill(
+                agent, voice, recovered, persistent_memory,
+                agent.skills, direct
+            )
+            break
         current_input = recovered  # next iteration processes this input
 
 
