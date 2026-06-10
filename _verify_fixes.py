@@ -3,7 +3,17 @@ import subprocess, sys, re
 
 # ── 1. Compile check ──────────────────────────────────────────────────────
 print("Compiling core files...")
-for f in ("commands.py", "voice.py", "main.py", "skills/__init__.py", "automation.py"):
+import os
+files_to_compile = ["commands.py", "voice.py", "main.py", "automation.py"]
+if os.path.isdir("skills"):
+    for root, _, files in os.walk("skills"):
+        for file in files:
+            if file.endswith(".py"):
+                files_to_compile.append(os.path.join(root, file))
+else:
+    files_to_compile.append("skills.py")
+
+for f in files_to_compile:
     result = subprocess.run([sys.executable, "-m", "py_compile", f], capture_output=True, text=True)
     if result.returncode != 0:
         print(f"  FAIL: {f}\n{result.stderr}")
